@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
-class ProfileController extends Controller
-{
+class ProfileController extends Controller {
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
-    {
+    public function edit(Request $request): View {
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
@@ -24,9 +22,16 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+    public function update(ProfileUpdateRequest $request): RedirectResponse {
+        $data = $request->validated();
+
+        $image = $data['image'] ?? null;
+
+        if ($image) {
+            $data['image'] = $image->store('avatars', 'public');
+        }
+
+        $request->user()->fill($data);
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
@@ -40,8 +45,7 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
-    {
+    public function destroy(Request $request): RedirectResponse {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);
