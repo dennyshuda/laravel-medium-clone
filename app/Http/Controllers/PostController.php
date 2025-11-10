@@ -13,7 +13,7 @@ class PostController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $posts = DB::table("posts")->orderBy('created_at', 'asc')->paginate(10);
+        $posts = Post::orderBy('created_at', 'asc')->paginate(10);
 
         return view('post.index', [
             'posts' => $posts
@@ -59,8 +59,8 @@ class PostController extends Controller {
     /**
      * Display the specified resource.
      */
-    public function show(Post $post) {
-        //
+    public function show(string $username, Post $post) {
+        return view('post.show', ['post' => $post]);
     }
 
     /**
