@@ -5,19 +5,15 @@
                 <h1 class="text-5xl mb-4">{{ $post->title }}</h1>
                 <section class="flex gap-4">
                     <div>
-                        @if ($post->user->image)
-                            <img class="w-12 h-12 rounded-full object-cover" src="{{ Storage::url($post->user->image) }}"
-                                alt="{{ $post->user->name }}">
-                        @else
-                            <img class="w-12 h-12 rounded-full object-cover"
-                                src="https://tamilnaducouncil.ac.in/wp-content/uploads/2020/04/dummy-avatar.jpg"
-                                alt="Dummy Avatar">
-                        @endif
+                        <x-user-avatar :user="$post->user" />
                     </div>
 
                     <div>
                         <div class="flex gap-2">
-                            <h3>{{ $post->user->username }}</h3>
+                            <a href="{{ route('profile.show', $post->user) }}"
+                                class="hover:underline">{{ $post->user->username }}</a>
+                            &middot;
+                            <a href="" class="text-emerald-600">Follow</a>
                         </div>
                         <div class="flex gap-2 text-sm text-gray-500">
                             {{ $post->readTime() }} min read
