@@ -26,6 +26,10 @@ class Post extends Model {
         return $this->belongsTo(Category::class);
     }
 
+    public function likes() {
+        return $this->hasMany(Like::class);
+    }
+
     public function readTime($wordsPerminute = 100) {
         $wordCount = str_word_count(strip_tags($this->content));
         $minutes = ceil($wordCount / $wordsPerminute);

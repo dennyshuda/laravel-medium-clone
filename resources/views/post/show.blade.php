@@ -24,7 +24,7 @@
                     </div>
                 </section>
 
-                <x-clap-button />
+                <x-like-button :post="$post" />
 
                 <section class="mt-8">
                     <img src="{{ Storage::url($post->image) }}" alt="{{ $post->title }}">
