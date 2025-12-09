@@ -1,7 +1,7 @@
 @props(['post'])
 
 <section x-data="like" class="mt-8 p-4 border-t border-b">
-    <button @click="likeClick()" class="flex gap-2 text-gray-500 ">
+    <button @click="likeToggle()" class="flex gap-2 text-gray-500 ">
         <template x-if="!hasLiked">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
@@ -27,7 +27,7 @@
         Alpine.data('like', () => ({
             hasLiked: {{ auth()->user()->hasLiked($post) ? 'true' : 'false' }},
             count: {{ $post->likes()->count() }},
-            likeClick() {
+            likeToggle() {
                 axios.post('/like/{{ $post->id }}').then(response => {
                     this.hasLiked = !this.hasLiked
                     this.count = response.data.likesCount
