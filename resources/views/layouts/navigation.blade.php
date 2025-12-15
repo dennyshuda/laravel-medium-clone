@@ -1,5 +1,5 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <div class="shrink-0 flex items-center">
@@ -9,22 +9,22 @@
                 </div>
             </div>
 
-            <div class="flex items-center">
-                <a href="{{ route('post.create') }}" class="flex justify-center">
-                    <x-primary-button class="h-fit">
-                        Create Post
-                    </x-primary-button>
-                </a>
+            <div class="flex items-center gap-2">
+                <x-link href="{{ route('post.create') }}" class="gap-1">
+                    <img src="{{ asset('icons/write.svg') }}" alt="Write icon" class="w-6 h-6">
+                    <p>Write</p>
+                </x-link>
 
                 @guest()
-                    <a href="{{ route('register') }}"
-                        class="hidden sm:flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                        Create an Account
-                    </a>
-                    <a href="{{ route('login') }}"
-                        class="hidden sm:flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                        Login
-                    </a>
+                    <x-link href="{{ route('register') }}" class="bg-green-700 text-white rounded-2xl">
+                        Sign up
+                    </x-link>
+                    <x-link href="{{ route('login') }}">
+                        Sign in
+                    </x-link>
+                    <div class="ml-5">
+                        <img src="{{ asset('icons/avatar.svg') }}" alt="Avatar icon" class="w-8 h-8">
+                    </div>
                 @endguest
 
                 @auth()
