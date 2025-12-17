@@ -1,6 +1,6 @@
 @props(['post'])
 
-<section x-data="like" class="mt-8 p-4 border-t border-b">
+<section x-data="like">
     <button @click="likeToggle()" class="flex gap-2 text-gray-500 ">
         <template x-if="!hasLiked">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

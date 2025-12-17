@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostUpdateRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller {
@@ -67,14 +71,32 @@ class PostController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Post $post) {
+        $categories = Category::all();
+        return view('post.edit', [
+            'post' => $post,
+            'categories' => $categories
+        ]);
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post) {
-        //
+    public function update(PostUpdateRequest $request, Post $post) {
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
+            }
+            $data['image'] = $request->file('image')
+                ->store('posts', 'public');
+        }
+
+        $data['slug'] = Str::slug($data['title']);
+        $post->update($data);
+
+        return redirect()->route('profile.lists',  auth()->user());
     }
 
     /**

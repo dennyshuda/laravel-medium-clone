@@ -15,7 +15,7 @@
             </h5>
         </a>
         <p class="mb-3 font-normal text-gray-700">
-            {{ Str::words($post->content, 20, '...') }}
+            {!! Str::words($post->content, 20, '...') !!}
         </p>
 
         <div class="flex gap-5 items-center text-sm text-gray-500">

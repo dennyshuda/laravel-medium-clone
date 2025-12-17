@@ -22,7 +22,7 @@
         </section>
 
         <aside class="w-[450px] border-l px-8 pt-5">
-            <x-follow-wrapper :user="$user">
+            <x-follow-wrapper :user="$user" class="space-y-2 mr-10">
                 <x-user-avatar :user="$user" size="w-24 h-24" />
                 <h3 class="font-medium">{{ $user->name }}</h3>
                 <p class="text-gray-500 font-medium"><span x-text="followersCount"></span> followers</p>

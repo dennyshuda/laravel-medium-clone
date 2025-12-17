@@ -18,9 +18,13 @@ Route::get('/@{user:username}/lists', [PublicProfileController::class, 'lists'])
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('dashboard');
-    Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+
     Route::post('/post', [PostController::class, 'store'])->name('post.store');
+    Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+    Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+    Route::put('/post/{post}/update', [PostController::class, 'update'])->name('post.update');
     Route::get('/@{username}/{post:slug}', [PostController::class, 'show'])->name('post.show');
+
     Route::post('/follow/{user}', [FollowerController::class, 'followUnfollow'])->name('follow');
     Route::post('/like/{post}', [LikeController::class, 'like'])->name('like');
 
