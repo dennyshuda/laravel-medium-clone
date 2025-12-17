@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
@@ -12,6 +13,8 @@ Route::get('/', function () {
 });
 
 Route::get('/@{user:username}', [PublicProfileController::class, 'show'])->name('profile.show');
+Route::get('/@{user:username}/about', [PublicProfileController::class, 'about'])->name('profile.about');
+Route::get('/@{user:username}/lists', [PublicProfileController::class, 'lists'])->name('profile.lists');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('dashboard');
@@ -20,6 +23,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/@{username}/{post:slug}', [PostController::class, 'show'])->name('post.show');
     Route::post('/follow/{user}', [FollowerController::class, 'followUnfollow'])->name('follow');
     Route::post('/like/{post}', [LikeController::class, 'like'])->name('like');
+
+    Route::get('/category/{category}', [CategoryController::class, 'category'])->name('category');
 });
 
 Route::middleware('auth')->group(function () {

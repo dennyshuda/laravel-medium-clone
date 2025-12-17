@@ -4,6 +4,7 @@
             <div class="w-[750px] ml-auto">
                 <h2 class="text-4xl font-bold">{{ $user->name }}</h2>
                 <div class="my-5 flex gap-5 border-b py-3">
+
                     <a href="{{ route('profile.show', $user->username) }}" class="text-gray-600">Home</a>
                     <a href="{{ route('profile.lists', $user->username) }}" class="text-gray-600">Lists</a>
                     <a href="{{ route('profile.about', $user->username) }}" class="text-gray-600">About</a>
@@ -18,15 +19,16 @@
                         </div>
                     @endforelse
                 </div>
+                <div class="my-5">{{ $posts->links() }}</div>
             </div>
         </section>
 
         <aside class="w-[450px] border-l px-8 pt-5">
             <x-follow-wrapper :user="$user">
                 <x-user-avatar :user="$user" size="w-24 h-24" />
-                <h3 class="font-medium">{{ $user->name }}</h3>
-                <p class="text-gray-500 font-medium"><span x-text="followersCount"></span> followers</p>
-                <p class="text-gray-500">{{ $user->bio }}</p>
+                <h3>{{ $user->name }}</h3>
+                <p class="text-gray-500"><span x-text="followersCount"></span> followers</p>
+                <p>{{ $user->bio }}</p>
                 @if (auth()->user() && auth()->user()->id !== $user->id)
                     <div>
                         <button @click="follow" class="rounded-full px-4 py-2 text-white"

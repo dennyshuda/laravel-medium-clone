@@ -1,6 +1,6 @@
 @props(['user'])
 
-<div x-data="follow" {{ $attributes }}>
+<div x-data="follow" {{ $attributes->merge(['class' => 'flex flex-col gap-2 mr-20']) }}>
     {{ $slot }}
 </div>
 
