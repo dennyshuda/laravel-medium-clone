@@ -102,7 +102,15 @@ class PostController extends Controller {
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post) {
-        //
+    public function delete(Post $post) {
+        if ($post->image) {
+            Storage::disk('public')->delete($post->image);
+        }
+
+        $post->delete();
+
+        return redirect()
+            ->route('profile.lists', auth()->user())
+            ->with('success', 'Post deleted');
     }
 }

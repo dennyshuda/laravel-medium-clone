@@ -24,6 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::put('/post/{post}/update', [PostController::class, 'update'])->name('post.update');
     Route::get('/@{username}/{post:slug}', [PostController::class, 'show'])->name('post.show');
+    Route::delete('/post/{post}/delete', [PostController::class, 'delete'])->name('post.delete');
 
     Route::post('/follow/{user}', [FollowerController::class, 'followUnfollow'])->name('follow');
     Route::post('/like/{post}', [LikeController::class, 'like'])->name('like');
