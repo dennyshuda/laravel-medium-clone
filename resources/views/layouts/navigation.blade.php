@@ -16,7 +16,7 @@
                 </x-link>
 
                 @guest()
-                    <x-link href="{{ route('register') }}" class="bg-green-700 text-white rounded-2xl">
+                    <x-link href="{{ route('register') }}" class="bg-green-700 text-white rounded-2xl hover:text-white">
                         Sign up
                     </x-link>
                     <x-link href="{{ route('login') }}">
