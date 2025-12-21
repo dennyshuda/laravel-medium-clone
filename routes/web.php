@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -9,7 +10,8 @@ use App\Http\Controllers\PublicProfileController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [PostController::class, 'index'])->name('dashboard');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
 Route::get('/@{user:username}', [PublicProfileController::class, 'show'])->name('profile.show');
 Route::get('/@{user:username}/about', [PublicProfileController::class, 'about'])->name('profile.about');
 Route::get('/@{user:username}/lists', [PublicProfileController::class, 'lists'])->name('profile.lists');
