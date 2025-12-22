@@ -12,6 +12,11 @@
                     <a href="{{ route('home.index') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
+
+                    <div class="flex items-center bg-gray-100/50 px-3 rounded-full">
+                        <img src="{{ asset('icons/search.svg') }}" alt="Search icon" class="w-5 h-5">
+                        <input type="text" placeholder="Search" class="focus:ring-0 border-none bg-transparent">
+                    </div>
                 </div>
             </div>
 
