@@ -13,6 +13,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                serif: ['Noto Serif', 'Georgia', ...defaultTheme.fontFamily.serif],
             },
         },
     },

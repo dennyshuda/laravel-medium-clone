@@ -1,3 +1,76 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+@layer base {
+    /* Medium-like article content styling */
+    .prose {
+        font-family: "Noto Serif", Georgia, serif;
+        line-height: 1.8;
+    }
+
+    .prose p {
+        margin-bottom: 1.5rem;
+        font-size: 1.125rem;
+        line-height: 1.8;
+        color: #242424;
+    }
+
+    .prose h1,
+    .prose h2,
+    .prose h3 {
+        font-family: Figtree, sans-serif;
+        letter-spacing: -0.02em;
+    }
+
+    .prose img {
+        border-radius: 0.5rem;
+        margin: 2rem auto;
+    }
+
+    .prose blockquote {
+        border-left: 3px solid #242424;
+        padding-left: 1rem;
+        font-style: italic;
+        color: #6b7280;
+    }
+
+    .prose a {
+        color: #15803d;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    .prose ul,
+    .prose ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .prose li {
+        margin-bottom: 0.5rem;
+        font-size: 1.125rem;
+        line-height: 1.8;
+    }
+}
+
+/* Alpine.js cloaking fix */
+[x-cloak] {
+    display: none !important;
+}
