@@ -12,16 +12,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-Route::get('/@{user:username}', [PublicProfileController::class, 'show'])->name('profile.show');
-Route::get('/@{user:username}/about', [PublicProfileController::class, 'about'])->name('profile.about');
-Route::get('/@{user:username}/lists', [PublicProfileController::class, 'lists'])->name('profile.lists');
+Route::name('profile.')->group(function () {
+    Route::get('/@{user:username}', [PublicProfileController::class, 'show'])->name('show');
+    Route::get('/@{user:username}/about', [PublicProfileController::class, 'about'])->name('about');
+    Route::get('/@{user:username}/lists', [PublicProfileController::class, 'lists'])->name('lists');
+});
+
+Route::get('/@{username}/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/post', [PostController::class, 'store'])->name('post.store');
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
     Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::put('/post/{post}/update', [PostController::class, 'update'])->name('post.update');
-    Route::get('/@{username}/{post:slug}', [PostController::class, 'show'])->name('post.show');
     Route::delete('/post/{post}/delete', [PostController::class, 'delete'])->name('post.delete');
 
     Route::post('/follow/{user}', [FollowerController::class, 'followUnfollow'])->name('follow');

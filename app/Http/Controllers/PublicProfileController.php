@@ -13,6 +13,7 @@ class PublicProfileController extends Controller {
             'posts' => $posts
         ]);
     }
+
     public function about(User $user) {
         return view('profile.about', [
             'user' => $user,
