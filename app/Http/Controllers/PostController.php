@@ -6,8 +6,6 @@ use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -57,7 +55,7 @@ class PostController extends Controller {
             'published_at' => $data['published_at'] ?? null
         ]);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('home.index');
     }
 
     /**
