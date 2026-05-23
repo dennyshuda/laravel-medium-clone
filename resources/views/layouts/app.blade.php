@@ -11,13 +11,16 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <x-head.tinymce-config />
+    @stack('scripts')
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased bg-white text-gray-900">
     <div class="min-h-screen">
         <x-state.sidebar-state>
             @include('layouts.navigation')
