@@ -1,27 +1,25 @@
 <x-app-layout>
-    <div class="py-4">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <x-category-tabs>
-                        <p class="text-gray-900 text-center py-10">No Categories found</p>
-                    </x-category-tabs>
-                </div>
+    <div class="flex justify-center">
+        <main class="w-full max-w-[680px] px-4 pt-6">
+            <div class="border-b mb-2">
+                <x-category-tabs>
+                    <p class="text-gray-900 text-center py-10">No Categories found</p>
+                </x-category-tabs>
             </div>
 
-            <div class="mt-4 text-gray-900">
+            <div class="divide-y divide-gray-100">
                 @forelse ($posts as $post)
-                    <x-post-item :post="$post"></x-post-item>
+                <x-post-item :post="$post"></x-post-item>
                 @empty
-                    <div>
-                        <p class="text-gray-900 text-center py-10">No Posts found</p>
-                    </div>
+                <div>
+                    <p class="text-gray-900 text-center py-10">No Posts found</p>
+                </div>
                 @endforelse
             </div>
 
-            <div>
+            <div class="py-8">
                 {{ $posts->links() }}
             </div>
-        </div>
+        </main>
     </div>
 </x-app-layout>

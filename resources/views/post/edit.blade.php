@@ -1,50 +1,57 @@
 <x-app-layout>
-    <div class="py-4">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8">
-                <form method="POST" action="{{ route('post.update', $post) }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('put')
+    <div class="max-w-3xl mx-auto px-4 py-8">
+        <form method="POST" action="{{ route('post.update', $post) }}" enctype="multipart/form-data">
+            @csrf
+            @method('put')
 
-                    <div class="mb-4">
-                        <x-input-label for="image" :value="__('Image')" />
-                        <x-text-input
-                            class="block mt-1 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
-                            id="image" name="image" type="file" accept=".png, .jpg, .jpeg" :value="old('image')" />
-                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                    </div>
-
-                    <div class="mb-4">
-                        <x-input-label for="title" :value="__('Title')" />
-                        <x-text-input id="title" class="block mt-1 w-full" type="text" name="title"
-                            value="{{ $post->title }}" autofocus />
-                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
-                    </div>
-
-                    <div class="mb-4">
-                        <x-input-label for="category_id" :value="__('Category')" />
-                        <select name="category_id" id="category_id"
-                            class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
-                            <option value="">Select a category</option>
-                            @foreach ($categories as $category)
-                                <option @selected(old('category_id', $post->category_id) == $category->id) value="{{ $category->id }}">{{ $category->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
-                    </div>
-
-                    <div class="mb-4">
-                        <x-input-label for="content" :value="__('Content')" />
-                        <textarea class="tinymce" name="content">{{ $post->content }}</textarea>
-                        <x-input-error :messages="$errors->get('content')" class="mt-2" />
-                    </div>
-
-                    <x-primary-button>
-                        submit
-                    </x-primary-button>
-                </form>
+            {{-- Title --}}
+            <div class="mb-6">
+                <input id="title" name="title" type="text" value="{{ $post->title }}" placeholder="Title" autofocus
+                    class="w-full text-4xl font-bold text-gray-900 border-none p-0 focus:ring-0 placeholder:text-gray-300" />
+                <x-input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
-        </div>
+
+            {{-- Image --}}
+            <div class="mb-6">
+                <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Featured image</label>
+                <input id="image" name="image" type="file" accept=".png, .jpg, .jpeg"
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200" />
+                <x-input-error :messages="$errors->get('image')" class="mt-2" />
+            </div>
+
+            {{-- Category --}}
+            <div class="mb-6">
+                <label for="category_id" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <select name="category_id" id="category_id"
+                    class="w-full border-gray-200 focus:border-gray-400 focus:ring-0 rounded-lg">
+                    <option value="">Select a category</option>
+                    @foreach ($categories as $category)
+                    <option @selected(old('category_id', $post->category_id) == $category->id) value="{{ $category->id
+                        }}">{{ $category->name }}
+                    </option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
+            </div>
+
+            {{-- Content --}}
+            <div class="mb-6">
+                <label for="content" class="block text-sm font-medium text-gray-700 mb-1">Story</label>
+                <textarea class="tinymce" name="content">{{ $post->content }}</textarea>
+                <x-input-error :messages="$errors->get('content')" class="mt-2" />
+            </div>
+
+            {{-- Buttons --}}
+            <div class="flex justify-between items-center">
+                <a href="{{ route('post.show', ['username' => $post->user->username, 'post' => $post->slug]) }}"
+                    class="text-sm text-gray-500 hover:text-gray-700 transition">
+                    Cancel
+                </a>
+                <button type="submit"
+                    class="bg-green-700 text-white rounded-full px-6 py-2 text-sm font-medium hover:bg-green-800 transition">
+                    Update
+                </button>
+            </div>
+        </form>
     </div>
 </x-app-layout>
