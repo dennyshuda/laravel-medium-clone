@@ -1,18 +1,16 @@
-<ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 justify-center">
-    <li class="me-2">
-        <a href="{{ route('dashboard') }}"
-            class="inline-block px-4 py-2 rounded-lg hover:text-gray-900 hover:bg-gray-100">
-            All
-        </a>
-    </li>
+@props(['categories' => []])
+
+<div class="flex gap-4 overflow-x-auto pb-3 text-sm scrollbar-hide">
+    <a href="{{ route('home.index') }}"
+        class="{{ request()->routeIs('home.index') ? 'text-gray-900 font-semibold border-b-2 border-gray-900 pb-1' : 'text-gray-500 hover:text-gray-900 pb-1' }}">
+        All
+    </a>
     @forelse ($categories as $category)
-        <li class="me-2">
-            <a href="{{ route('category', ['category' => $category->id]) }}"
-                class="{{ request()->routeIs('category') && request()->route('category')->id == $category->id ? 'active text-white bg-blue-600 inline-block px-4 py-2 rounded-lg' : 'inline-block px-4 py-2 rounded-lg hover:text-gray-900 hover:bg-gray-100' }}">
-                {{ $category->name }}
-            </a>
-        </li>
+    <a href="{{ route('category', ['category' => $category->id]) }}"
+        class="{{ request()->routeIs('category') && request()->route('category')->id == $category->id ? 'text-gray-900 font-semibold border-b-2 border-gray-900 pb-1' : 'text-gray-500 hover:text-gray-900 pb-1' }} whitespace-nowrap">
+        {{ $category->name }}
+    </a>
     @empty
-        {{ $slot }}
+    {{ $slot }}
     @endforelse
-</ul>
+</div>

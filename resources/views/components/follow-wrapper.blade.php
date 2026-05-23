@@ -9,10 +9,11 @@
         Alpine.data('follow', () => ({
             followersCount: {{ $user->followers()->count() }},
             following: {{ $user->isFollowedBy(auth()->user()) ? 'true' : 'false' }},
+            userId: {{ $user->id }},
 
             follow() {
                 this.following = !this.following;
-                axios.post('/follow/${{ $user->id }}').then(res => {
+                axios.post('/follow/' + this.userId).then(res => {
                     console.log(res.data);
                     this.followersCount = res.data.followersCount;
                 }).catch(err => {
